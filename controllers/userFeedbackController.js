@@ -1,7 +1,6 @@
 const feedbackModel = require("../models/feedback");
 
 const userFeedbackController = async (req, res) => {
-    let msg = "hello";
     try {
         const email = req.body.email;
         const feedback = req.body.feedback;
