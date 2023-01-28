@@ -5,9 +5,9 @@ const { v4: uuidv4 } = require("uuid");
 const user = require("../models/user");
 
 const registerController = async (req, res) => {
-    let { email, name, password, address, state, pinCode } = req.body;
+    let { email, name, password, address, state, pincode } = req.body;
     try {
-        if (!email || !name || !password || !address || !state || !pinCode) {
+        if (!email || !name || !password || !address || !state || !pincode) {
             return res.status(400).json({ msg: "please fill all the fields" });
         }
         const userExists = await user.findOne({ email });
@@ -26,7 +26,7 @@ const registerController = async (req, res) => {
                 password,
                 address,
                 state,
-                pinCode,
+                pincode,
             });
             if (registerUser) {
                 return res
