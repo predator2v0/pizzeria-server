@@ -3,21 +3,27 @@ const bcrypt = require("bcryptjs");
 const user = require("../models/user");
 
 const loginController = async (req, res) => {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
     try {
-        if (!username || !password) {
+        if (!email || !password) {
             return res.status(400).json({ msg: "please fill all the fields" });
         }
-        const loggedIn = await user.findOne({ username });
-
-        if (loggedIn && loggedIn.username === username && await bcrypt.compare(password, loggedIn.password)) {
-            return res.status(200).json({ msg: "user logged in successfully"});
+        const userExists = await user.findOne({ email });
+        console.log(email, password);
+        if (
+            userExists &&
+            userExists.email === email &&
+            (await bcrypt.compare(password, userExists.password))
+        ) {
+            return res.status(200).json({ msg: "user logged in successfully" });
         } else {
-            return res.status(400).json({ msg: "incorrect credentials" })
+            return res.status(400).json({ msg: "incorrect credentials" });
         }
     } catch (err) {
-        return res.status(400).json({ err: err })
+        return res
+            .status(400)
+            .json({ err: err, msg: "Login Failed! please try again!" });
     }
-}
+};
 
 module.exports = loginController;
