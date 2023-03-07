@@ -9,7 +9,7 @@ const userFeedbackController = require("../controllers/userFeedbackController")
 postRoutes.post("/order/:user", placeOrderController);
 
 // send feedback
-postRoutes.post("/sendfeedback", userFeedbackController);
+postRoutes.post("/feedback", userFeedbackController);
 
 // exporting all the post routes
 module.exports = postRoutes;
