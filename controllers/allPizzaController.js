@@ -1,7 +1,14 @@
 const pizzaModel = require("../models/pizza");
 const allPizzaController = async (req, res) => {
     try {
-        const pizzas = await pizzaModel.find({});
+        let pizzas;
+        const query = new RegExp(req.query.q, 'ig')
+        if(query){
+            pizzas = await pizzaModel.find({"name": query});
+        } else{
+            pizzas = await pizzaModel.find({});
+        }
+        
         if (pizzas) {
             res.send(pizzas);
         } else {
