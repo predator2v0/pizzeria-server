@@ -1,8 +1,8 @@
 const userModel = require('../models/user');
 
-const userDetailsController = async (req, res) => {
+const userDashboardController = async (req, res) => {
     try {
-        const userId = req.params.user;
+        const userId = req.params.userId;
         const userData = await userModel.findOne(
             { userID: userId },
             { password: 0 }
@@ -18,4 +18,4 @@ const userDetailsController = async (req, res) => {
     }
 };
 
-module.exports = userDetailsController;
+module.exports = userDashboardController;

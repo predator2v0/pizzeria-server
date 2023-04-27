@@ -1,8 +1,8 @@
 const express = require('express');
 const pizzaRouter = express.Router();
 
-
 const allPizzaController = require('../../controllers/allPizzaController');
+const searchPizzaController = require('../../controllers/searchPizzaController');
 
 /**
  * method: GET
@@ -14,7 +14,6 @@ pizzaRouter.get('/api/pizzas', allPizzaController);
  * method: GET
  * description: get pizzas based on search term
  */
-pizzaRouter.get('/api/pizza/search', searchPizzaController);
-
+pizzaRouter.get('/api/pizzas/search', searchPizzaController);
 
 module.exports = pizzaRouter;

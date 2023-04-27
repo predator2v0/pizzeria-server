@@ -3,6 +3,8 @@ const userRouter = express.Router();
 
 const userFeedbackController = require('../../controllers/userFeedbackController');
 const placeOrderController = require('../../controllers/placeOrderController');
+const userDashboardController = require('../../controllers/userDashboardController');
+const updateProfileController = require('../../controllers/updateProfileController');
 
 
 /**
@@ -21,7 +23,7 @@ userRouter.put('/api/users/:userId/update', updateProfileController);
  * method: POST
  * description: place order by user
  */
-userRouter.post('/api/users/userId/order', placeOrderController);
+userRouter.post('/api/users/:userId/order', placeOrderController);
 
 /**
  * method: POST

@@ -5,6 +5,7 @@ const authRouter = express.Router();
 // import login and register controllers
 const registerController = require("../../controllers/registerController");
 const loginController = require("../../controllers/loginController");
+const logoutController = require("../../controllers/logoutController");
 
 /**
  * method: POST
