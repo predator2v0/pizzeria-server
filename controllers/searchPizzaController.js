@@ -4,7 +4,6 @@ const pizzaModel = require('../models/pizza');
  *
  * @param {*} req request object
  * @param {*} res response object
- * @returns
  * @description this method returns an array of pizzas based on the search term.
  */
 const searchPizzaController = async (req, res) => {
