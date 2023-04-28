@@ -19,8 +19,8 @@ const searchPizzaController = async (req, res) => {
                     data: pizzas,
                 });
             } else {
-                res.status(200).json({
-                    status: 'success',
+                res.status(404).json({
+                    status: 'failure',
                     message: 'no pizzas found',
                 });
             }
