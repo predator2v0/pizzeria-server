@@ -39,9 +39,15 @@ const registerController = async (req, res) => {
                 pincode,
             });
             if (registerUser) {
+                const userData = {
+                    userId: registerUser.userID,
+                    email: registerUser.email,
+                    name: registerUser.name,
+                };
                 res.status(201).json({
                     status: 'success',
                     message: 'user registered successfully',
+                    data: userData,
                 });
             }
         }
