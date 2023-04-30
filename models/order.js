@@ -1,32 +1,63 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-const orderSchema = mongoose.Schema({
-    user: {
+const deliveryAddressSchema = new mongoose.Schema({
+    name: {
         type: String,
         required: true,
     },
-    items: {
+    location: {
+        type: String,
+        required: true,
+    },
+    landmark: {
+        type: String,
+        required: false,
+    },
+    pinCode: {
+        type: Number,
+        required: true,
+        min: 100000,
+        max: 999999,
+    },
+});
+
+const orderSchema = new mongoose.Schema({
+    userID: {
+        type: String,
+        required: true,
+    },
+    orderID: {
+        type: String,
+        required: true,
+        unique: true,
+    },
+    timeStamp: {
+        type: String,
+        required: true,
+    },
+    orders: {
         type: [],
         required: true,
     },
     price: {
         type: Number,
         required: true,
-    }, 
-    status: {
-        type: String, 
-        required: true
-    }, 
-    deliveryAddress: {
-        type: String,
-        required: true
     },
-    contact: {
+    status: {
+        type: String,
+        required: true,
+        default: 'open',
+    },
+    deliveryAddress: {
+        type: deliveryAddressSchema,
+        required: true,
+    },
+    contactNumber: {
         type: Number,
-        required: true
-    }
+        required: true,
+    },
 });
 
-const orderModel = mongoose.model("order", orderSchema);
+const orderModel = mongoose.model('order', orderSchema);
 
 module.exports = orderModel;
