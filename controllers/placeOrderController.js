@@ -1,41 +1,63 @@
-const orderModel = require("../models/order");
+const orderModel = require('../models/order');
+const { v1: uuid } = require('uuid');
 
 const placeOrderController = async (req, res) => {
-    const { items, amount, status, deliveryAddress, contactNo } = req.body;
     try {
-        const username = req.params.user;
-        if (
-            !username ||
-            !items ||
-            !amount ||
-            !status ||
-            !deliveryAddress ||
-            !contactNo
-        ) {
-            return res
-                .status(400)
-                .json({
-                    msg: "unable to order, please add items to cart and fill other mandatory fields",
-                });
-        }
-        const userData = await orderModel.create({
-            user: username,
-            items: items,
-            price: amount,
-            status: status,
-            deliveryAddress: deliveryAddress,
-            contact: contactNo,
+        const userId = req.params.userId;
+        const orders = req.body.orders;
+        const price = req.body.price;
+        const address = req.body.address;
+        const contactNumber = req.body.contactNumber;
+
+        const orderId = await generateOrderId();
+        const orderTimeStamp = generateOrderTimeStamp();
+
+        const placeOrder = await orderModel.create({
+            userID: userId,
+            orderID: orderId,
+            timeStamp: orderTimeStamp,
+            orders: orders,
+            price: price,
+            deliveryAddress: address,
+            contactNumber: contactNumber,
         });
-        if (userData) {
-            return res.status(200).json({ msg: "order placed successfully" });
+        if (placeOrder) {
+            const orderData = {
+                orderId: placeOrder.orderID,
+                timeStamp: placeOrder.timeStamp
+            }
+            res.status(201).json({
+                status: 'success',
+                message: 'order placed successfully',
+                data: orderData
+            });
         } else {
-            return res
-                .status(400)
-                .json({ msg: "error in placing order. try again" });
+            res.status(500).json({
+                status: 'failure',
+                message: 'error placing order',
+            });
         }
-    } catch (error) {
-        console.log(error);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({
+            status: 'failure',
+            message: 'internal server error',
+        });
     }
+};
+
+const generateOrderId = async () => {
+    const lastOrder = await orderModel.findOne(
+        {},
+        { orderID: 1 },
+        { sort: { orderID: -1 } }
+    );
+    const lastSl = parseInt(lastOrder.orderID.substring(3));
+    const orderId = `ORD${(lastSl + 1).toString().padStart(7, 0)}`;
+    return orderId;
+};
+const generateOrderTimeStamp = () => {
+    return new Date().toLocaleString('en-IN').toString();
 };
 
 module.exports = placeOrderController;
