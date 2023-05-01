@@ -12,7 +12,7 @@ const verifyToken = require('../../middlewares/auth/verifyToken');
  * method: GET
  * description: get user dashboard data.
  */
-userRouter.get('/api/users/:userId/dashboard', userDashboardController);
+userRouter.get('/api/users/:userId/dashboard',verifyToken, userDashboardController);
 
 /**
  * method: PUT
