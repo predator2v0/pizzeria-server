@@ -40,6 +40,7 @@ const userDashboardController = async (req, res) => {
             });
         }
     } catch (err) {
+        console.log(err);
         res.status(500).json({
             status: 'failure',
             message: 'internal server error',
@@ -49,7 +50,7 @@ const userDashboardController = async (req, res) => {
 
 /**
  * @param {string} userId user id of the user
- * @returns {object} userdetails
+ * @returns {object} userDetails
  * @description this method takes the user id as input and returns an object holding
  * all details of the user except the password.
  */
@@ -62,7 +63,7 @@ const fetchUserDetails = async (userId) => {
 };
 
 /**
- * @param {strubg} userId user id of the user
+ * @param {string} userId user id of the user
  * @returns {object} orderDetails
  * @description this method takes the user id as input and returns object/ array of object
  * that holds all the orders details of that user.
