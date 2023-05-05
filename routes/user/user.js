@@ -15,10 +15,10 @@ const verifyToken = require('../../middlewares/auth/verifyToken');
 userRouter.get('/api/users/:userId/dashboard',verifyToken, userDashboardController);
 
 /**
- * method: PUT
+ * method: PATCH
  * description: update user profile
  */
-userRouter.put('/api/users/:userId/update', updateProfileController);
+userRouter.patch('/api/users/:userId/update', verifyToken, updateProfileController);
 
 /**
  * method: POST
