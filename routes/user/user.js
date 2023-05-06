@@ -6,7 +6,7 @@ const placeOrderController = require('../../controllers/placeOrderController');
 const userDashboardController = require('../../controllers/userDashboardController');
 const updateProfileController = require('../../controllers/updateProfileController');
 const verifyToken = require('../../middlewares/auth/verifyToken');
-
+const {checkEmailUpdate} = require('../../middlewares/user/updateProfile')
 
 /**
  * method: GET
@@ -18,7 +18,7 @@ userRouter.get('/api/users/:userId/dashboard',verifyToken, userDashboardControll
  * method: PATCH
  * description: update user profile
  */
-userRouter.patch('/api/users/:userId/update', verifyToken, updateProfileController);
+userRouter.patch('/api/users/:userId/update', verifyToken, checkEmailUpdate, updateProfileController);
 
 /**
  * method: POST
