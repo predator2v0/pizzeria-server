@@ -1,5 +1,11 @@
 const userModel = require('../models/user');
 
+/**
+ * @param {*} req request object
+ * @param {*} res response object
+ * @description this method is used to update the user personal details like name, address,
+ * state and pincode. it returns the updated user data after data modification is successful.
+ */
 const updateProfileController = async (req, res) => {
     try {
         const userId = req.params.userId;
