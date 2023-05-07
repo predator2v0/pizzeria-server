@@ -5,24 +5,39 @@
 
 # Directory Structure
 ```
-. - root dir
-├── README.md - project docs
-├── config - project configuration dir
-│   └── dbconnect.js - db configuration file
-├── controllers - all controllers
-├── middlewares - all middlewares
-│   └── auth - auth middlewares
+.
+├── README.md
+├── config
+│   └── dbconnect.js
+├── controllers
+├── middlewares
+│   └── auth
 │       └── verifyToken.js
-├── models - db models
-├── routes - all routes
-│   ├── auth.js - auth routes(register, login)
-│   ├── get.js - all get routes
-│   └── post.js - all post routes
+├── models
+├── routes
+│   ├── auth/
+│   ├── user/
+│   └── pizza/
 ├── package-lock.json
-├── package.json - project metadata(info, dependency and npm scripts)
-└── server.js - project entry point
+├── package.json
+└── server.js
 ```
-
+- `config/`
+    - holds the server configuration files. e.g. database config(connection file).
+- `controllers/`
+    - holds the api controllers - methods to handle api requests.
+- `middlewares/`
+    - holds the server middlewares to manipulate the requests. e.g. auth middleware (to validate api authentication) etc.
+- `models/`
+    - holds the mongoose ORM models/ schemas for the different collections in the mongoDB database.
+- `routes/` 
+    - holds all the api routes e.g. auth routes such as login and register etc.
+- `package.json`
+    - the metadata file used to describe the project and its dependencies. it holds the project info as well as the list of dependancies and npm scripts.
+- `server.js`
+    - this is the project entry point. this file contains code for accumulating all the features and strat the server.
+- `README.md`
+    - this file contains the project documentation.
 # NPM Scripts
 following NPM scripts can  be used to run the app
 - "start": "node server.js",
