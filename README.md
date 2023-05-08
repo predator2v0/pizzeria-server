@@ -10,16 +10,35 @@
 ├── config
 │   └── dbconnect.js
 ├── controllers
+│   ├── allPizzaController.js
+│   ├── loginController.js
+│   ├── logoutController.js
+│   ├── placeOrderController.js
+│   ├── registerController.js
+│   ├── searchPizzaController.js
+│   ├── updateProfileController.js
+│   ├── userDashboardController.js
+│   └── userFeedbackController.js
 ├── middlewares
-│   └── auth
-│       └── verifyToken.js
+│   ├── auth
+│   │   └── verifyToken.js
+│   └── user
+│       └── updateProfile.js
 ├── models
-├── routes
-│   ├── auth/
-│   ├── user/
-│   └── pizza/
+│   ├── feedback.js
+│   ├── ingredient.js
+│   ├── order.js
+│   ├── pizza.js
+│   └── user.js
 ├── package-lock.json
 ├── package.json
+├── routes
+│   ├── auth
+│   │   └── auth.js
+│   ├── pizza
+│   │   └── pizza.js
+│   └── user
+│       └── user.js
 └── server.js
 ```
 - `config/`
